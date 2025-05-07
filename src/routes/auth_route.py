@@ -24,7 +24,7 @@ class AuthRoute:
         """
         data = request.get_json()
         username = data.get('username').strip()
-        new_password = data.get('new_password').strip()
+        new_password = data.get('password').strip()
 
         auth_service = AuthService()
         response = auth_service.handle_reset_password(username, new_password)

@@ -4,7 +4,7 @@ from src.routes.auth_route import AuthRoute
 from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'sua_chave_supersecreta_aqui'  # valor seguro e privado
+app.config['JWT_SECRET_KEY'] = 'Secrir'  # valor seguro e privado
 jwt = JWTManager(app)
 
 @app.route('/login', methods=['POST'])

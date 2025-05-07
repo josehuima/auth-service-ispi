@@ -95,7 +95,19 @@ class AuthService:
             user_info = user_data['data'][0]
 
             # lógica para atualizar a senha no banco de dados
-            # Exemplo: requests.put(f"{DATABASE_MANAGER_URL}/update_password", json={"username": username, "new_password": new_password})
+           # lógica para atualizar a senha no banco de dados
+
+            new_request_data = {
+                    
+                    "table": "alunos",
+                    "data": {
+                        "username": username,
+                        "password": new_password
+                    }
+                }
+            requests.post(
+                f"{DATABASE_MANAGER_URL}/update-password",json=new_request_data, headers=headers)
+
 
             logger.info(f"Senha do usuário {username} redefinida com sucesso.")
             return {"msg": "Senha redefinida com sucesso"}, 200
