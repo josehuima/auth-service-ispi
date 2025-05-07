@@ -1,0 +1,19 @@
+from flask import request, jsonify
+from src.controllers.auth_controller import AuthService
+
+class AuthRoute:
+    def login_route():
+        """
+        Route for user login.
+        """
+        data = request.get_json()
+        username = data.get('username').strip()
+        password = data.get('password').strip()
+
+        auth_service = AuthService()
+        response = auth_service.handle_login(username, password)
+
+        if isinstance(response, tuple):
+            return jsonify(response[0]), response[1]
+
+        return jsonify(response), 200

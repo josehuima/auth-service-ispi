@@ -1,0 +1,13 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-JWT-Extended
+Flask-Mail
+Werkzeug
+psycopg2
+gunicorn
+flask_cors
+python-dotenv
+requests
+free_sms_otp
+arrow
