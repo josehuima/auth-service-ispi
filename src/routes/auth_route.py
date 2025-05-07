@@ -17,3 +17,4 @@ class AuthRoute:
             return jsonify(response[0]), response[1]
 
         return jsonify(response), 200
+    
