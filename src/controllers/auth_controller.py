@@ -65,3 +65,40 @@ class AuthService:
         except Exception as e:
             logging.error(f"Error checking password for user {username}: {e}")
             return {"msg": "Erro ao verificar senha"}, 500
+    
+
+    def handle_reset_password(self, username, new_password):
+        """
+        Resetar password.
+        """
+        request_data = {
+            "service": "AUTH-SERVICE",
+            "table": "alunos",
+            "limit": 1,
+            "offset": 0,
+            "filters": {
+                "username": username
+            }
+        }
+
+        try:
+            headers = {'Content-Type': 'application/json'}
+            response = requests.post(f"{DATABASE_MANAGER_URL}/query", json=request_data, headers=headers)
+            response.raise_for_status()  # Retorna erro para código de status 4xx ou 5xx  
+
+            user_data = response.json()
+
+            if 'data' not in user_data or not isinstance(user_data['data'], list) or not user_data['data']:
+                logging.error(f"User {username} not found in database.")
+                return {"msg": "Usuário não encontrado"}, 404
+
+            user_info = user_data['data'][0]
+
+            # lógica para atualizar a senha no banco de dados
+            # Exemplo: requests.put(f"{DATABASE_MANAGER_URL}/update_password", json={"username": username, "new_password": new_password})
+
+            logger.info(f"Senha do usuário {username} redefinida com sucesso.")
+            return {"msg": "Senha redefinida com sucesso"}, 200
+        except Exception as e:
+            logging.error(f"Error resetting password for user {username}: {e}")
+            return {"msg": "Erro ao redefinir senha"}, 500
