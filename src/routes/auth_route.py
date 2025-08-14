@@ -7,7 +7,7 @@ class AuthRoute:
         Rota para login.
         """
         data = request.get_json()
-        username = data.get('username').strip()
+        username = data.get('username')
         password = data.get('password').strip()
 
         auth_service = AuthService()
